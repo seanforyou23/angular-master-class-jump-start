@@ -33,11 +33,6 @@ export class ContactsService {
   }
 
   addContact(contact: Contact) {
-    // return this.http.post<Contact>(
-    //   `${this.apiEndpoint}/contacts`,
-    //   contact
-    // );
-
     return this.http.post<ContactResponse>(`${this.apiEndpoint}/contacts`, contact)
       .pipe(map(data => data.item));
   }

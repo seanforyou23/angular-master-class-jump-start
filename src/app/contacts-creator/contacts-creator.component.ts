@@ -20,7 +20,6 @@ export class ContactsCreatorComponent implements OnInit {
   }
 
   save(contact: Contact) {
-    console.log('adding a thing', contact);
     // this.contactsService.addContact(contact)
     //   .toPromise()
     //   .then(() => {

@@ -24,8 +24,18 @@
             </mat-hint>
 
           </mat-input-container>
-          <mat-input-container fxFlex>
-            <input ngModel matInput placeholder="Email" name="email">
+          <mat-input-container fxFlex [dividerColor]="emailProp.errors ? 'warn' : 'primary'">
+            <input
+              ngModel
+              #emailProp="ngModel"
+              trmValidateEmail
+              matInput
+              placeholder="Email"
+              name="email">
+
+              <mat-hint align="end" *ngIf="!emailProp.valid && !emailProp.pristine">
+                <ng-container *ngIf="emailProp.errors?.validateEmail">{{emailProp.errors.validateEmail.errText}}</ng-container>
+              </mat-hint>
           </mat-input-container>
           <mat-input-container fxFlex>
             <input ngModel matInput placeholder="Birthday" name="birthday" type="date">
