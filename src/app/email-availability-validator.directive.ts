@@ -4,7 +4,6 @@ import { ContactsService } from './contacts.service';
 import { map } from 'rxjs/operators';
 
 export function checkEmailAvailabilityFactory(contactsService: ContactsService) {
-  console.log('test');
   return (c: FormControl) => {
     return contactsService.isEmailAvailable(c.value)
       .pipe(map(response => !response.error ? null : {

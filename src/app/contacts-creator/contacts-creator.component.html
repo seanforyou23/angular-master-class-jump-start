@@ -1,5 +1,5 @@
 <div class="trm-contacts-creator">
-  <form novalidate #form="ngForm" (ngSubmit)="save(form.value)">
+  <form novalidate [formGroup]="form" (ngSubmit)="save(form.value)">
     <mat-card>
       <mat-card-title-group>
         <img mat-card-md-image alt="Placeholder image" src="/assets/images/placeholder.png">
@@ -8,60 +8,64 @@
       </mat-card-title-group>
       <mat-card-content>
         <div fxLayout="column">
-          <mat-input-container fxFlex [dividerColor]="nameProp.errors ? 'warn' : 'primary'">
+          <mat-input-container fxFlex [dividerColor]="form.get('name').errors ? 'warn' : 'primary'">
             <input
-              #nameProp="ngModel"
-              ngModel
-              required
-              minlength="3"
               matInput
+              formControlName="name"
               placeholder="Name"
               name="name">
 
-            <mat-hint align="end" *ngIf="!nameProp.pristine && !nameProp.valid">
-              <ng-container *ngIf="nameProp.errors?.required">its required</ng-container>
-              <ng-container *ngIf="nameProp.errors?.minlength">failed minlength</ng-container>
+            <mat-hint align="end" *ngIf="!form.get('name').pristine && !form.get('name').valid">
+              <ng-container *ngIf="form.get('name').errors?.required">its required</ng-container>
+              <ng-container *ngIf="form.get('name').errors?.minlength">failed minlength</ng-container>
             </mat-hint>
 
           </mat-input-container>
-          <mat-input-container fxFlex [dividerColor]="emailProp.errors ? 'warn' : 'primary'">
+          <mat-input-container fxFlex [dividerColor]="form.get('email').errors ? 'warn' : 'primary'">
             <input
-              ngModel
-              #emailProp="ngModel"
-              trmValidateEmail
-              trmEmailAvailabilityValidator
               matInput
+              formControlName="email"
               placeholder="Email"
               name="email">
 
-              <mat-hint align="end" *ngIf="!emailProp.valid && !emailProp.pristine">
-                <ng-container *ngIf="emailProp.errors?.validateEmail">{{emailProp.errors.validateEmail.errText}}</ng-container>
+              <mat-hint align="end" *ngIf="!form.get('email').valid && !form.get('email').pristine">
+                <ng-container *ngIf="form.get('email').errors?.validateEmail">{{form.get('email').errors.validateEmail.errText}}</ng-container>
               </mat-hint>
           </mat-input-container>
           <mat-input-container fxFlex>
-            <input ngModel matInput placeholder="Birthday" name="birthday" type="date">
+            <input ngModel matInput placeholder="Birthday" name="birthday" formControlName="birthday" type="date">
           </mat-input-container>
           <mat-input-container fxFlex>
-            <input ngModel matInput placeholder="Phone" name="phone">
+            <input ngModel matInput placeholder="Phone" name="phone" formControlName="phone">
           </mat-input-container>
           <mat-input-container fxFlex>
-            <input ngModel matInput placeholder="Website" name="website">
+            <input ngModel matInput placeholder="Website" name="website" formControlName="website">
           </mat-input-container>
-          <mat-radio-group name="gender">
+          <!-- <mat-radio-group name="gender">
             <mat-radio-button>
               INSERT_GENDER_VARIANT
             </mat-radio-button>
-          </mat-radio-group>
-          <fieldset fxLayout="column" ngModelGroup="address">
+          </mat-radio-group> -->
+
+          <fieldset fxLayout="column" formGroupName="address">
             <legend>Address</legend>
             <mat-input-container fxFlex>
-              <input ngModel matInput placeholder="Street" name="street">
+              <input
+                matInput
+                placeholder="Street"
+                name="street">
             </mat-input-container>
             <mat-input-container fxFlex>
-              <input ngModel matInput placeholder="Zip" name="zip">
+              <input
+                matInput
+                placeholder="Zip"
+                name="zip">
             </mat-input-container>
             <mat-input-container fxFlex>
-              <input ngModel matInput placeholder="City" name="city">
+              <input
+                matInput
+                placeholder="City"
+                name="city">
             </mat-input-container>
             <mat-select placeholder="Country" name="country">
               <mat-option>INSER_COUNTRY_NAME</mat-option>
