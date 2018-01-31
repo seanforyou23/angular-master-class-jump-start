@@ -15,6 +15,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 
+// only export modules you actually need to use
 @NgModule({
   exports: [
     MatButtonModule,

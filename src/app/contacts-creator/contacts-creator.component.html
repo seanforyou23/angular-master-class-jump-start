@@ -1,0 +1,71 @@
+<div class="trm-contacts-creator">
+  <form novalidate #form="ngForm" (ngSubmit)="save(form.value)">
+    <mat-card>
+      <mat-card-title-group>
+        <img mat-card-md-image alt="Placeholder image" src="/assets/images/placeholder.png">
+        <mat-card-title></mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content>
+        <div fxLayout="column">
+          <mat-input-container fxFlex [dividerColor]="nameProp.errors ? 'warn' : 'primary'">
+            <input
+              #nameProp="ngModel"
+              ngModel
+              required
+              minlength="3"
+              matInput
+              placeholder="Name"
+              name="name">
+
+            <mat-hint align="end" *ngIf="!nameProp.pristine && !nameProp.valid">
+              <ng-container *ngIf="nameProp.errors?.required">its required</ng-container>
+              <ng-container *ngIf="nameProp.errors?.minlength">failed minlength</ng-container>
+            </mat-hint>
+
+          </mat-input-container>
+          <mat-input-container fxFlex>
+            <input ngModel matInput placeholder="Email" name="email">
+          </mat-input-container>
+          <mat-input-container fxFlex>
+            <input ngModel matInput placeholder="Birthday" name="birthday" type="date">
+          </mat-input-container>
+          <mat-input-container fxFlex>
+            <input ngModel matInput placeholder="Phone" name="phone">
+          </mat-input-container>
+          <mat-input-container fxFlex>
+            <input ngModel matInput placeholder="Website" name="website">
+          </mat-input-container>
+          <mat-radio-group name="gender">
+            <mat-radio-button>
+              INSERT_GENDER_VARIANT
+            </mat-radio-button>
+          </mat-radio-group>
+          <fieldset fxLayout="column" ngModelGroup="address">
+            <legend>Address</legend>
+            <mat-input-container fxFlex>
+              <input ngModel matInput placeholder="Street" name="street">
+            </mat-input-container>
+            <mat-input-container fxFlex>
+              <input ngModel matInput placeholder="Zip" name="zip">
+            </mat-input-container>
+            <mat-input-container fxFlex>
+              <input ngModel matInput placeholder="City" name="city">
+            </mat-input-container>
+            <mat-select placeholder="Country" name="country">
+              <mat-option>INSER_COUNTRY_NAME</mat-option>
+            </mat-select>
+          </fieldset>
+        </div>
+      </mat-card-content>
+      <mat-card-actions fxLayout fxLayoutAlign="center center">
+        <button
+          mat-button
+          type="submit"
+          [disabled]="!form.valid">Save</button>
+
+        <a mat-button title="Cancel creating new contact" routerLink="/">Cancel</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
