@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactsService } from '../contacts.service';
 import { Contact } from '../models/contact';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { validateEmail } from '../email-validator.directive';
 import { checkEmailAvailabilityFactory } from '../email-availability-validator.directive';
 
@@ -37,7 +37,7 @@ export class ContactsCreatorComponent implements OnInit {
         [checkEmailAvailabilityFactory(this.contactsService)]
       ],
       birthday: '',
-      phone: '',
+      phone: this.fb.array(['']),
       website: '',
       address: this.fb.group({
         street: '',
@@ -46,6 +46,16 @@ export class ContactsCreatorComponent implements OnInit {
         country: ''
       })
     });
+  }
+
+  addPhoneField() {
+    const control = <FormArray>this.form.get('phone');
+    control.push(new FormControl(''));
+  }
+
+  removePhoneField(idx) {
+    const control = <FormArray>this.form.get('phone');
+    control.removeAt(idx);
   }
 
   save(contact: Contact) {
