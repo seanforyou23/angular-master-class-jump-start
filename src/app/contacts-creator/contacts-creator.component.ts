@@ -46,6 +46,10 @@ export class ContactsCreatorComponent implements OnInit {
         country: ''
       })
     });
+
+    this.form.valueChanges.subscribe(data => {
+      console.log('valueChanges: ', data);
+    });
   }
 
   addPhoneField() {

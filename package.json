@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "license": "thoughtram Training Material License (TTML 1.0)",
   "scripts": {
-    "start": "ng serve",
+    "start": "ng serve --port 9086 --open",
     "build": "ng build",
     "vote-server": "node server/voting-server.js",
     "rest-api": "node server/contacts-server.js",
